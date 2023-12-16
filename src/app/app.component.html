@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <h1>Sistema de Cuentas por Cobrar</h1>
+
+      <button mat-icon-button (click)="sidenav.toggle();">
+          <mat-icon>menu</mat-icon>
+      </button>
+
+      <span style="flex: 1 1 auto;"></span>
+      <label style="font-size: 14px; margin-right: 20px;">
+          Consumo de Empleados
+      </label>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav opened="true" mode="side" style="width: 200px;">
+    <mat-nav-list>
+      <ng-container *ngFor="let menu of menus">
+        <mat-list-item [routerLink]="menu.url">
+          <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
+          <div mat-line>{{menu.name}}</div>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+      <div style="height: 90vh;">
+          <router-outlet></router-outlet>
+      </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

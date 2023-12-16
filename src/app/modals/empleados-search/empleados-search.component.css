@@ -1,0 +1,8 @@
+table {
+    width: 50%;
+    height: 50%;
+}
+
+.hidden-column {
+    display: none;
+}

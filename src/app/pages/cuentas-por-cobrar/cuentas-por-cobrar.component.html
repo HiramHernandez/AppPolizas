@@ -1,0 +1,104 @@
+<h1 style="margin: 20px 0px 0px 40px">Cuentar por cobrar</h1>
+
+<mat-card style="margin: 20px 40px 40px 40px">
+
+    <mat-card-title>
+        <button mat-raised-button color="primary" (click)="abrirAltaOEdicion()">
+            <mat-icon mat-list-icon>add</mat-icon> Agregar una Cuenta por cobrar
+        </button>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="dashboard-card-content">
+        <mat-grid-list cols="2" rowHeight="75px">
+            <mat-grid-tile colspan="2">
+                <mat-form-field style="width: 70%;">
+                    <mat-label>Codigo de empleado</mat-label>
+                    <input matInput [(ngModel)]="informacionEmpleado" #input>
+                    <mat-icon matSuffix (click)="abrirBusquedaEmpleados()">search</mat-icon>
+                  </mat-form-field>                  
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="startDatepicker" placeholder="Fecha de Inicio" [(ngModel)]="startDate" (ngModelChange)="onFechaInicioChange($event)">
+                    <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatepicker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="endDatepicker" placeholder="Fecha de Fin" [(ngModel)]="endDate" (ngModelChange)="onFechaFinChange($event)">
+                    <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatepicker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+                <button style="width: 100%;" mat-raised-button color="accent" (click)="buscar()">Buscar</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+        
+        <app-progress [message]="messageProgress" [isLoading]="isLoading"></app-progress>
+        <div class="mat-elevation-z2" *ngIf="dataListaCuentas">
+            <table mat-table [dataSource]="dataListaCuentas">
+              <ng-container matColumnDef="idCuentaPorCobrar">
+                <th mat-header-cell *matHeaderCellDef class="hidden-column"> Id </th>
+                <td mat-cell *matCellDef="let cuenta" class="hidden-column">{{ cuenta.idCuentaPorCobrar }}</td>
+              </ng-container>
+              <ng-container matColumnDef="folio">
+                <th mat-header-cell *matHeaderCellDef> Folio </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.folio }}</td>
+              </ng-container>
+              <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef> Monto </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.monto }}</td>
+              </ng-container>
+              <ng-container matColumnDef="fechaCreacion">
+                <th mat-header-cell *matHeaderCellDef> Fecha Creación </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.fechaCreacion }}</td>
+              </ng-container>
+              <ng-container matColumnDef="fechaModificacion">
+                <th mat-header-cell *matHeaderCellDef> Fecha Modificación </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.fechaModificacion }}</td>
+              </ng-container>
+              <ng-container matColumnDef="activo">
+                <th mat-header-cell *matHeaderCellDef class="hidden-column"> Activo </th>
+                <td mat-cell *matCellDef="let cuenta" class="hidden-column">{{ cuenta.activo }}</td>
+              </ng-container>
+              <ng-container matColumnDef="idEmpleado">
+                <th mat-header-cell *matHeaderCellDef> Id Empleado </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.idEmpleado }}</td>
+              </ng-container>
+              <ng-container matColumnDef="nombreEmpleado">
+                <th mat-header-cell *matHeaderCellDef> Nombre Empleado </th>
+                <td mat-cell *matCellDef="let cuenta">{{ cuenta.nombreEmpleado }}</td>
+              </ng-container>
+              <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef style="width: 80px;"> Acciones </th>
+                <td mat-cell *matCellDef="let cuenta">
+                  <div class="button-container">
+                    <button mat-icon-button color="primary" class="rounded-floating-button" (click)="edit(cuenta)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" class="rounded-floating-button" (click)="remove(cuenta)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+              <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+          
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="9">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+          
+
+    </mat-card-content>
+
+</mat-card>

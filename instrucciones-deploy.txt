@@ -1,0 +1,5 @@
+crear carpeta dist
+• ng build --configuration production --aot
+
+ Desplegar en netifly cli (este comando nos ira guiando)
+ • netlify deploy --prod
