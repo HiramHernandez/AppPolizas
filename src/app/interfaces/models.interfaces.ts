@@ -42,3 +42,10 @@ export interface IPolizaDataForm{
     sku: number,
     cantidad: number
 }
+
+export interface IEmpleadoData{
+    idEmpleado: number,
+    nombre: string,
+    apellido: string,
+    puesto: string,		
+}

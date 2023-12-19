@@ -43,7 +43,6 @@ export class PolizasComponent {
 
   constructor(
     private dialog: MatDialog,
-    private enviarEmpleadoServ: EnviarEmpleadoService,
     private polizaService: PolizaService,
     private snackBarService: SnackMsgService
   ) { }

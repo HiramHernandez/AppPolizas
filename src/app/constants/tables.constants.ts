@@ -8,3 +8,11 @@ export const POLIZA_COLUMNS: ITableColumn[] = [
     { clave: 'articulo', titulo: 'Articulo' },
     { clave: 'acciones', titulo: 'Acciones', tipo: 'acciones' },
 ];
+
+export const EMPLEADO_COLUMNS: ITableColumn[] = [
+    { clave: 'idEmpleado', titulo: 'Id Empleado', hidden: true },
+    { clave: 'nombre', titulo: 'Nombre' },
+    { clave: 'apellido', titulo: 'Apellido' },
+    { clave: 'puesto', titulo: 'Puesto' },
+    { clave: 'acciones', titulo: 'Acciones', tipo: 'acciones' },
+];
