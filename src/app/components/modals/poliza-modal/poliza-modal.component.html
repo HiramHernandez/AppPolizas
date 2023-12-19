@@ -6,13 +6,21 @@
             <mat-grid-tile>
                 <mat-form-field appearance="outline">
                     <mat-label>Empleado</mat-label>
-                    <input matInput autocomplete="off" formControlName="EmpleadoGenero">       
+                    <mat-select formControlName="EmpleadoGenero">
+                        <mat-option *ngFor="let empleado of empleados" [value]="empleado.idEmpleado">
+                            {{ empleado.nombre }} {{ empleado.apellido }}
+                        </mat-option>
+                    </mat-select>       
                 </mat-form-field>
             </mat-grid-tile>       
             <mat-grid-tile>
                 <mat-form-field appearance="outline">
                     <mat-label>SKU</mat-label>
-                    <input matInput type="number" autocomplete="off" formControlName="SKU">       
+                    <mat-select formControlName="SKU">
+                        <mat-option *ngFor="let sku of inventarios" [value]="sku.sku">
+                            {{ sku.nombre }}
+                        </mat-option>
+                    </mat-select>       
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile>

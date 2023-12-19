@@ -5,8 +5,17 @@ export interface IResponse<T>{
     meta: IMeta
 }
 
+export interface IResponseDataMessage{
+    data: IDataMessage,
+    meta: IMeta
+}
+
 export interface IMeta{
     status: string
+}
+
+export interface IDataMessage{
+    idmensaje: string
 }
 
 export interface IPolizaResponse{

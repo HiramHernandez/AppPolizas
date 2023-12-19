@@ -5,6 +5,7 @@ import { IEmpleado, IReadEmpleado } from '../interfaces/empleado.interface';
 import { IResponse } from '../interfaces/response.interface';
 import { environment } from 'src/environments/environment';
 import { IEmpleadoResponse } from '../interfaces/models.interfaces';
+import { ApiConstants } from '../constants/api.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class EmpleadoService {
   urlApi: string = `${environment.apiUlr}`;
 
   constructor(private _http: HttpClient) { }
+
+  Get(): Observable<IResponse<IEmpleadoResponse[]>>{
+    return this._http.get<IResponse<IEmpleadoResponse[]>>(`${environment.api}${ApiConstants.GET_EMPLEADOS}`);
+  }
 
   GetAll(): Observable<IResponse<IEmpleadoResponse[]>>{
     return this._http.get<IResponse<IEmpleadoResponse[]>>(`${environment.api}/empleados`);

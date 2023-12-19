@@ -5,6 +5,13 @@ export interface IEmpleadoResponse{
 	puesto: string
 }
 
+export interface IInventarioResponse{
+    idInventario: number,
+    cantidad: number,
+    sku: number,
+    nombre: string
+}
+
 export interface IPolizaInfo{
     cantidad: number,
     idpoliza: number
@@ -27,4 +34,11 @@ export interface IPolizaRenderTabla{
     empleado: string,
     sku: number,
     articulo: string
+}
+
+export interface IPolizaDataForm{
+    idPoliza: number,
+    empleadoGenero: number,
+    sku: number,
+    cantidad: number
 }

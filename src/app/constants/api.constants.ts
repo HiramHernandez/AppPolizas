@@ -3,6 +3,11 @@ export abstract class ApiConstants{
     static readonly GET_ALL_POLIZAS = "/poliza";
     static readonly GET_POLIZA_BY_ID = "/poliza/@IdPoliza";
     static readonly GET_POLIZA_BY_EMPLEADO = "/poliza/empleado/@IdEmpleado";
+    static readonly POST_POLIZA = "/poliza";
+    static readonly PUT_POLIZA = "/poliza/@IdPoliza"
+
+    static readonly GET_INVENTARIOS = "/inventario";
+    static readonly GET_EMPLEADOS = "/empleados";
 
     // MESSAGES
     static readonly MESSAGE_OK = "Ok";
