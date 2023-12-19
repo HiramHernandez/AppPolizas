@@ -7,7 +7,7 @@ export interface IEmpleadoResponse{
 
 export interface IPolizaInfo{
     cantidad: number,
-    idPoliza: number
+    idpoliza: number
 }
 
 export interface IDetalleArticuloInfo{
@@ -18,4 +18,13 @@ export interface IDetalleArticuloInfo{
 export interface IEmpleadoInfo{
     nombre: string
     apellido: string
+}
+
+
+export interface IPolizaRenderTabla{
+    idPoliza: number,
+    cantidad: number,
+    empleado: string,
+    sku: number,
+    articulo: string
 }

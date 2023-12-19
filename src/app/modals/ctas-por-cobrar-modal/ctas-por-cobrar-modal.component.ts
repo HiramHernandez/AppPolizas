@@ -67,12 +67,12 @@ export class CtasPorCobrarModalComponent {
   
       this.cuentaPorCobrarServ.add(nuevaCuenta).subscribe({
         next: resp => {
-          if(resp.success){
+          /*if(resp.success){
             this.snackMsgServ.mostrarMsg("Se guardo una nueva cuenta por cobrar", "cuentas por cobrar");
             this.modalActual.close(true);
           } else{
             SwalMensaje.mostrarAlerta("Alert", `Preste atención: ${resp.message}`);
-          }
+          }*/
         }, 
         error: err => {
           console.error(err)
@@ -90,12 +90,12 @@ export class CtasPorCobrarModalComponent {
       }
       this.cuentaPorCobrarServ.edit(cambiosCuenta, 17).subscribe({
         next: (resp) => {
-          if(resp.success){
+          /*if(resp.success){
             this.snackMsgServ.mostrarMsg("Se edito la cuenta por cobrar", "cuentas por cobrar");
             this.modalActual.close(true);
           }else{
             SwalMensaje.mostrarAlerta("Alert", `Preste atención: ${resp.message}`);
-          }
+          }*/
         }
       });
     }

@@ -47,9 +47,9 @@ export class EmpleadosSearchComponent {
   traerEmpleados(){
     this.empleadoServ.getEmpleados().subscribe({
       next: (resp) => {
-        if(resp.success){
+        /*if(resp.success){
           this.dataListaEmpleados.data = resp.data;
-        }
+        }*/
       },
       complete: () => {
         this.isLoading = false;

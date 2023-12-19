@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>{{ tituloAccion }} Poliza</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="formularioPoliza">
+        <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Empleado</mat-label>
+                    <input matInput autocomplete="off" formControlName="EmpleadoGenero">       
+                </mat-form-field>
+            </mat-grid-tile>       
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>SKU</mat-label>
+                    <input matInput type="number" autocomplete="off" formControlName="SKU">       
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>CANTIDAD</mat-label>
+                    <input matInput type="number" autocomplete="off" formControlName="Cantidad">       
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button mat-raised-button color="primary"
+        [disabled]="formularioPoliza.invalid"
+        (click)="guardarOEditar()"
+    >{{ botonAccion }}</button>
+</mat-dialog-actions>

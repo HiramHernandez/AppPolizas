@@ -1,17 +1,17 @@
-import { IDetalleArticuloInfo, IEmpleado, IEmpleadoInfo, IPolizaInfo } from "./models.interfaces"
+import { IDetalleArticuloInfo, IEmpleadoInfo, IPolizaInfo } from "./models.interfaces"
 
 export interface IResponse<T>{
     data: T,
-    Meta: IMeta
+    meta: IMeta
 }
 
 export interface IMeta{
-    Status: string
+    status: string
 }
 
 export interface IPolizaResponse{
-    Poliza: IPolizaInfo,
-    Empleado: IEmpleadoInfo,
-    DetalleArticulo: IDetalleArticuloInfo
+    poliza: IPolizaInfo,
+    empleado: IEmpleadoInfo,
+    detalleArticulo: IDetalleArticuloInfo
 }
 

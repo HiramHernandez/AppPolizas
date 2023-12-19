@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-      <h1>Sistema de Cuentas por Cobrar</h1>
+      <h1>Sistema de Polizas</h1>
 
       <button mat-icon-button (click)="sidenav.toggle();">
           <mat-icon>menu</mat-icon>
@@ -8,7 +8,7 @@
 
       <span style="flex: 1 1 auto;"></span>
       <label style="font-size: 14px; margin-right: 20px;">
-          Consumo de Empleados
+          Polizas de Empleados
       </label>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -16,12 +16,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav opened="true" mode="side" style="width: 200px;">
     <mat-nav-list>
-      <ng-container *ngFor="let menu of menus">
-        <mat-list-item [routerLink]="menu.url">
-          <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
-          <div mat-line>{{menu.name}}</div>
-        </mat-list-item>
-      </ng-container>
+      <a mat-list-item *ngFor="let menu of menus" [routerLink]="['/' + menu.url]">
+        <span class="material-icons">
+          {{ menu.icon }}
+        </span>
+        {{ menu.name }}
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 

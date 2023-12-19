@@ -44,10 +44,10 @@ export class ListEmpleadosComponent {
     traerEmpleados(){
       this.empleadoServ.getEmpleados().subscribe({
         next: (resp) => {
-          if(resp.success){
+          /*if(resp.success){
             this.dataListaEmpleados.data = resp.data;
             console.log(this.dataInicio);
-          }
+          }*/
         },
         complete: () => {
           this.isLoading = false;
@@ -84,10 +84,10 @@ export class ListEmpleadosComponent {
         if(resp.isConfirmed){
           this.empleadoServ.editEmpleado(datosEmpleado, empleado.idEmpleado).subscribe({
             next: (response) => {
-              if(response.success){
+              /*if(response.success){
                 this.snackMsg.mostrarMsg("Se desactivo", "empleados");
                 this.traerEmpleados()
-              }
+              }*/
             }, error: errr => {
               this.snackMsg.mostrarMsg("Ocurrio un error al desactivar, intente más tarde", "empleados");
             }

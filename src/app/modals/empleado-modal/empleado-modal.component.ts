@@ -63,12 +63,12 @@ export class EmpleadoModalComponent implements OnInit {
   
       this.empleadoService.addEmpleado(empleadoNuevo).subscribe({
         next: resp => {
-          if(resp.success){
+          /*if(resp.success){
             this.snackMsgServ.mostrarMsg("Se guardo un nuevo empleado", "empleados");
             this.modalActual.close(true);
           } else{
             SwalMensaje.mostrarAlerta("Alert", `Preste atención: ${resp.message}`);
-          }
+          }*/
         }, 
         error: err => {
           console.error(err)
@@ -86,12 +86,12 @@ export class EmpleadoModalComponent implements OnInit {
       }
       this.empleadoService.editEmpleado(empleado, this.datosEmpleado.idEmpleado).subscribe({
         next: (resp) => {
-          if(resp.success){
+          /*if(resp.success){
             this.snackMsgServ.mostrarMsg("Se edito el empleado", "empleados");
             this.modalActual.close(true);
           }else{
             SwalMensaje.mostrarAlerta("Alert", `Preste atención: ${resp.message}`);
-          }
+          }*/
         }
       });
     }

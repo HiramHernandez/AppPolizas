@@ -16,7 +16,7 @@ import { CtasPorCobrarModalComponent } from 'src/app/modals/ctas-por-cobrar-moda
   styleUrls: ['./cuentas-por-cobrar.component.css']
 })
 export class CuentasPorCobrarComponent {
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   messageProgress: string = "Espere por favor, cargando las cuentas por cobrar";
   startDate: Date = new Date();
   endDate: Date = new Date();
@@ -56,10 +56,10 @@ export class CuentasPorCobrarComponent {
     this.cuentasPorCobrarServ.getCuentas(fechaInicioFormateada, fechaFinFormateada).subscribe({
       next: (resp) => {
         this.isLoading = true;
-        if(resp.success){
+        /*if(resp.success){
           this.dataListaCuentas.data = resp.data;
           console.log(this.dataListaCuentas.data);
-        }
+        }*/
       },
       complete: () => {
         this.isLoading = false;

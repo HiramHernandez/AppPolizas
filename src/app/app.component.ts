@@ -17,7 +17,7 @@ export class AppComponent {
   getMenus(): IMenu[]{
     return [
       {icon: "face", name: "Empleados" , url: "empleados"},
-      {icon: "book", name: "Cuentas por Cobrar" , url: "cuentas-por-cobrar"}
+      {icon: "book", name: "Polizas" , url: "polizas"}
     ];
   }
 
