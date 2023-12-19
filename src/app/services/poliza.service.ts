@@ -24,7 +24,12 @@ export class PolizaService {
 
   EditPoliza(body: IPolizaDataForm): Observable<IResponse<IResponseDataMessage>>{
     let url = ApiConstants.PUT_POLIZA.replace("@IdPoliza", body.idPoliza.toString());
-    return this._http.put<IResponse<IResponseDataMessage>>(url, body);
+    return this._http.put<IResponse<IResponseDataMessage>>(`${environment.api}${url}`, body);
+  }
+
+  RemovePoliza(polizaId: number): Observable<IResponse<IResponseDataMessage>>{
+    let url = ApiConstants.PUT_POLIZA.replace("@IdPoliza", polizaId.toString());
+    return this._http.delete<IResponse<IResponseDataMessage>>(`${environment.api}${url}`);
   }
 
 }

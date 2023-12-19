@@ -34,127 +34,89 @@ export class PolizaModalComponent {
     @Inject(MAT_DIALOG_DATA)
     private datosPoliza: IPolizaDataForm,
     private fb: FormBuilder
-    ){
-      this.formularioPoliza  = fb.group({
-        EmpleadoGenero: ["", Validators.required ],
-        SKU: ["", Validators.required ],
-        Cantidad: ["", Validators.required ],
-      });
-    }
+  ) {
+    this.formularioPoliza = fb.group({
+      EmpleadoGenero: ["", Validators.required],
+      SKU: ["", Validators.required],
+      Cantidad: ["", Validators.required],
+    });
+  }
 
-    ngOnInit(){
-      this.cargarEmpleados();
-      this.cargarInventarios();
-      if(this.datosPoliza != null){
-        this.mostrarPoliza();
-        this.botonAccion="Modificar";
-        this.tituloAccion = "Modificar";
-      }
+  ngOnInit() {
+    this.cargarEmpleados();
+    this.cargarInventarios();
+    if (this.datosPoliza != null) {
+      this.mostrarPoliza();
+      this.botonAccion = "Modificar";
+      this.tituloAccion = "Modificar";
     }
+  }
 
-    cargarEmpleados(){
-      this.empleadoService.Get().subscribe({
-        next: (resp) =>{
-          if(resp.meta.status === ApiConstants.MESSAGE_OK){
-            this.empleados = resp.data;
+  cargarEmpleados() {
+    this.empleadoService.Get().subscribe({
+      next: (resp) => {
+        if (resp.meta.status === ApiConstants.MESSAGE_OK) {
+          this.empleados = resp.data;
+        }
+      },
+      error: (error) => {
+        SwalMensaje.mostrarError("Poliza", "Hubo un error al obtener los empleados");
+      },
+    });
+  }
+
+  cargarInventarios() {
+    this.inventarioService.GetInventarios().subscribe({
+      next: (resp) => {
+        if (resp.meta.status === ApiConstants.MESSAGE_OK) {
+          this.inventarios = resp.data;
+        }
+      },
+      error: (error) => {
+        SwalMensaje.mostrarError("Poliza", "Hubo un error al obtener los inventarios");
+      },
+    });
+  }
+
+  mostrarPoliza() {
+    this.formularioPoliza.patchValue({
+      EmpleadoGenero: this.datosPoliza.empleadoGenero,
+      SKU: this.datosPoliza.sku,
+      Cantidad: this.datosPoliza.cantidad
+    });
+  }
+
+  guardarOEditar() {
+    const body: IPolizaDataForm = {
+      idPoliza: this.datosPoliza != null ? this.datosPoliza.idPoliza : 0,
+      empleadoGenero: this.formularioPoliza.value.EmpleadoGenero,
+      sku: this.formularioPoliza.value.SKU,
+      cantidad: this.formularioPoliza.value.Cantidad
+    }
+    if (this.datosPoliza != null) {
+      this.polizaService.EditPoliza(body).subscribe({
+        next: (resp) => {
+          if (resp.meta.status === ApiConstants.MESSAGE_OK) {
+            this.snackService.mostrarMsg("Se Actualizó la poliza", "exito");
+            this.modalActual.close(true);
+          } else {
+            SwalMensaje.mostrarError("Polizas", "Error al actulizar la poliza");
           }
-        },
-        error: (error) => {
-          SwalMensaje.mostrarError("Poliza", "Hubo un error al obtener los empleados");
-        },
+        }
       });
     }
-
-    cargarInventarios(){
-      this.inventarioService.GetInventarios().subscribe({
-        next: (resp) =>{
-          if(resp.meta.status === ApiConstants.MESSAGE_OK){
-            this.inventarios = resp.data;
+    else {
+      this.polizaService.SavePoliza(body).subscribe({
+        next: (resp) => {
+          if (resp.meta.status === ApiConstants.MESSAGE_OK) {
+            this.snackService.mostrarMsg("Se guardó la poliza", "exito");
+            this.modalActual.close(true);
+          } else {
+            SwalMensaje.mostrarError("Polizas", "Error al guardar la poliza");
           }
-        },
-        error: (error) => {
-          SwalMensaje.mostrarError("Poliza", "Hubo un error al obtener los inventarios");
-        },
+        }
       });
     }
 
-    mostrarPoliza(){
-      this.formularioPoliza.patchValue({
-        EmpleadoGenero: this.datosPoliza.empleadoGenero,
-        SKU: this.datosPoliza.sku,
-        Cantidad: this.datosPoliza.cantidad
-      });
-    }
-
-    guardarOEditar(){
-      /*
-      this.formularioPoliza  = fb.group({
-        EmpleadoGenero: ["", Validators.required ],
-        SKU: ["", Validators.required ],
-        Cantidad: ["", Validators.required ],
-      });
-      export interface IPolizaDataForm{
-        idPoliza: number,
-        empleadoGenero: number,
-        sku: number,
-        cantidad: number
-    }
-      */
-      
-      const body: IPolizaDataForm = {
-        idPoliza: this.datosPoliza != null ? this.datosPoliza.idPoliza : 0,
-        empleadoGenero: this.formularioPoliza.value.EmpleadoGenero,
-        sku: this.formularioPoliza.value.SKU,
-        cantidad: this.formularioPoliza.value.Cantidad
-      }
-      if(this.datosPoliza != null)
-      {
-        this.polizaService.EditPoliza(body).subscribe({
-          next: (resp) => {
-            if(resp.meta.status === ApiConstants.MESSAGE_OK){
-              SwalMensaje.mostrarExito("Polizas", "Se actualizó la poliza correctamente");
-            }else{
-              SwalMensaje.mostrarError("Polizas", "Error al actulizar la poliza");
-            }
-          }
-        });
-      }
-      else{
-        this.polizaService.SavePoliza(body).subscribe({
-          next: (resp) => {
-            if(resp.meta.status === ApiConstants.MESSAGE_OK){
-              SwalMensaje.mostrarExito("Polizas", "Se guardó la poliza correctamente");
-            }else{
-              SwalMensaje.mostrarError("Polizas", "Error al guardar la poliza");
-            }
-          }
-        });
-      }
-    }
-
-  /*
-  <form [formGroup]="formularioPoliza">
-        <mat-grid-list cols="1" rowHeight="80px">
-            <mat-grid-tile>
-                <mat-form-field appearance="outline">
-                    <mat-label>Empleado</mat-label>
-                    <input matInput autocomplete="off" formControlName="EmpleadoGenero">       
-                </mat-form-field>
-            </mat-grid-tile>       
-            <mat-grid-tile>
-                <mat-form-field appearance="outline">
-                    <mat-label>SKU</mat-label>
-                    <input matInput type="number" autocomplete="off" formControlName="SKU">       
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-form-field appearance="outline">
-                    <mat-label>CANTIDAD</mat-label>
-                    <input matInput type="number" autocomplete="off" formControlName="Cantidad">       
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </form>
-  */
-
+  }
 }
