@@ -3,4 +3,5 @@ export interface ITableColumn {
     titulo: string;
     transformador?: (valor: any) => string;
     tipo?: string;
+    hidden?: boolean;
 }

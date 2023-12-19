@@ -22,7 +22,3 @@ table {
     justify-content: center;
     margin: 5px; /* Añadir un margen para separar los botones */
 }
-
-.hidden-column {
-    display: none;
-}
