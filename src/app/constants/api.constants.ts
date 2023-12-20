@@ -8,6 +8,9 @@ export abstract class ApiConstants{
 
     static readonly GET_INVENTARIOS = "/inventario";
     static readonly GET_EMPLEADOS = "/empleados";
+    static readonly POST_EMPLEADO = "/empleados";
+    static readonly PUT_EMPLEADO = "/empleados/@IdEmpleado";
+    static readonly DELETE_EMPLEADO = "/empleados/@IdEmpleado";
 
     // MESSAGES
     static readonly MESSAGE_OK = "Ok";

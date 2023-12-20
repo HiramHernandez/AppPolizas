@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { EmpleadoModalComponent } from 'src/app/modals/empleado-modal/empleado-modal.component';
+import { EmpleadoModalComponent } from 'src/app/components/modals/empleado-modal/empleado-modal.component';
 import { SwalMensaje } from 'src/app/utility/swalmessage';
 import { EnviarEmpleadoService } from 'src/app/services/enviar-empleado.service';
 import { IEmpleado } from 'src/app/interfaces/empleado.interface';
@@ -45,12 +45,15 @@ export class EmpleadosComponent {
     
   }
 
+  ngAfterViewInit(): void {
+    this.dataListaEmpleados.paginator = this.paginacionTabla;
+  }
+
   Empleados(){
     this.empleadosData = [];
     this.empledoService.Get().subscribe({
       next: (resp) => {
         if(resp.meta.status === ApiConstants.MESSAGE_OK){
-          SwalMensaje.mostrarExito("", "Se obtuvieron los empleados");
           resp.data.forEach((emp) => {
             const empleado: IEmpleadoData = {
               idEmpleado: emp.idEmpleado,
@@ -73,16 +76,39 @@ export class EmpleadosComponent {
     });
   }
 
-  openEmpleadoModal(data: any | null){
-    
+  openEmpleadoModal(empleado: IEmpleadoData | null){
+    this.dialog.open(EmpleadoModalComponent, {
+      disableClose: true,
+      width: "350px",
+      data: empleado
+    }).afterClosed().subscribe(res => {
+
+      if (res === true) this.Empleados();
+    });
   }
 
-  edit(empleado: any){
 
-  }
-
-  remove(empleadoId: number){
-
+  remove(empleado: IEmpleadoData){
+    const nombreEmpleado: string = `${empleado.nombre} ${empleado.apellido}`
+    SwalMensaje.mostrarPregunta("Eliminar", `¿Desas elimar el empleado: ${nombreEmpleado}?`, "Si, eliminar").then((res) => {
+      if(res.isConfirmed){
+        this.empledoService.RemoveEmpleado(empleado.idEmpleado).subscribe({
+          next: (resp) =>{
+            if(resp.meta.status === ApiConstants.MESSAGE_OK){
+              this.snackBarService.mostrarMsg(`Se elimino el empleado: ${nombreEmpleado}`, "success");
+              this.Empleados();
+            }
+            else{
+              SwalMensaje.mostrarError("Empleados", "Hubo un error al eliminar el empleado");
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            SwalMensaje.mostrarError("Empleados", "Hubo un error al eliminar el empleado");
+          }
+        });
+      }
+    });
   }
 
   aplicarFiltroTabla(event: Event) {

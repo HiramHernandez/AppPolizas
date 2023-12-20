@@ -33,7 +33,7 @@
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button *ngIf="tableUtils.IsActionColumn(columna)" mat-icon-button color="warn"
-                  (click)="remove(element.idPoliza)">
+                  (click)="remove(element)">
                   <mat-icon>delete</mat-icon>
                 </button>
                 <span *ngIf="!tableUtils.IsActionColumn(columna)">{{ tableUtils.TransformValue(columna,

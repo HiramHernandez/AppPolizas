@@ -6,6 +6,8 @@ import { IResponse } from '../interfaces/response.interface';
 import { environment } from 'src/environments/environment';
 import { IEmpleadoResponse } from '../interfaces/models.interfaces';
 import { ApiConstants } from '../constants/api.constants';
+import { IResponseDataMessage } from '../interfaces/response.interface';
+import { IEmpleadoData } from '../interfaces/models.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,22 @@ export class EmpleadoService {
     return this._http.get<IResponse<IEmpleadoResponse[]>>(`${environment.api}${ApiConstants.GET_EMPLEADOS}`);
   }
 
+  SaveEmpleado(body: IEmpleadoData):  Observable<IResponse<IResponseDataMessage>>{
+    return this._http.post<IResponse<IResponseDataMessage>>(`${environment.api}${ApiConstants.POST_EMPLEADO}`, body);
+  }
+
+  EditEmpleado(body: IEmpleadoData): Observable<IResponse<IResponseDataMessage>>{
+    let url = ApiConstants.PUT_EMPLEADO.replace("@IdEmpleado", body.idEmpleado.toString());
+    return this._http.put<IResponse<IResponseDataMessage>>(`${environment.api}${url}`, body);
+  }
+
+  RemoveEmpleado(empleadoId: number): Observable<IResponse<IResponseDataMessage>>{
+    let url = ApiConstants.DELETE_EMPLEADO.replace("@IdEmpleado", empleadoId.toString());
+    return this._http.delete<IResponse<IResponseDataMessage>>(`${environment.api}${url}`);
+  }
+
+  //
+  //
   GetAll(): Observable<IResponse<IEmpleadoResponse[]>>{
     return this._http.get<IResponse<IEmpleadoResponse[]>>(`${environment.api}/empleados`);
   }
