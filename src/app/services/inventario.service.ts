@@ -19,4 +19,6 @@ export class InventarioService {
     return this._http.get<IResponse<IInventarioResponse[]>>(`${environment.api}${ApiConstants.GET_INVENTARIOS}`);
   }
 
+  
+
 }

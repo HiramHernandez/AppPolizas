@@ -1,1 +1,58 @@
-<p>inventarios works!</p>
+<mat-card style="margin: 20px 40px 40px 40px">
+  <h1 style="margin: 20px 0px 0px 40px">Lista de Inventarios</h1>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="dashboard-card-content">
+    <mat-grid-list cols="2" rowHeight="70px">
+
+      <mat-grid-tile>
+        <button style="width: 100%;" mat-raised-button color="primary" (click)="openInventarioModal(null)">
+          <mat-icon mat-list-icon>add</mat-icon> Agregar un Inventario
+        </button>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field style="width: 80%; height: 90%; margin-top: 15px;">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="aplicarFiltroTabla($event)" #input>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <app-progress [message]="messageProgress" [isLoading]="isLoading"></app-progress>
+    <div class="mat-elevation-2">
+      <table mat-table [dataSource]="dataListaInvetario">
+        <ng-container *ngFor="let columna of columns; let i = index" [matColumnDef]="columna.clave">
+          <ng-container>
+            <th mat-header-cell *matHeaderCellDef [ngClass]="columna.hidden ? 'hidden-column' : ''"> {{ columna.titulo
+              }} </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="columna.hidden ? 'hidden-column' : ''">
+              <button *ngIf="tableUtils.IsActionColumn(columna)" mat-icon-button color="primary"
+                (click)="openInventarioModal(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button *ngIf="tableUtils.IsActionColumn(columna)" mat-icon-button color="warn" (click)="remove(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span *ngIf="!tableUtils.IsActionColumn(columna)">{{ tableUtils.TransformValue(columna,
+                element[columna.clave]) }}</span>
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableUtils.GetColumns(columns)"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableUtils.GetColumns(columns);"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="tableUtils.GetColumns(columns).length">
+
+          </td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+
+</mat-card>

@@ -49,3 +49,10 @@ export interface IEmpleadoData{
     apellido: string,
     puesto: string,		
 }
+
+export interface IInvenarioData{
+    idInventario: number,
+    nombre: string,
+	sku: number,
+	cantidad: number
+}

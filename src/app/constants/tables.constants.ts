@@ -16,3 +16,11 @@ export const EMPLEADO_COLUMNS: ITableColumn[] = [
     { clave: 'puesto', titulo: 'Puesto' },
     { clave: 'acciones', titulo: 'Acciones', tipo: 'acciones' },
 ];
+
+export const INVENTARIO_COLUMNS: ITableColumn[] = [
+    { clave: 'idInventario', titulo: 'Id Invenatio', hidden: true },
+    { clave: 'sku', titulo: 'SKU' },
+    { clave: 'nombre', titulo: 'Nombre' },
+    { clave: 'cantidad', titulo: 'Cantidad' },
+    { clave: 'acciones', titulo: 'Acciones', tipo: 'acciones' },
+];
