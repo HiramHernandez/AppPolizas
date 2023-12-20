@@ -15,6 +15,8 @@ import { EmpleadoModalComponent } from 'src/app/components/modals/empleado-modal
 import { PolizasComponent } from './components/pages/polizas/polizas.component';
 import { EmpleadosComponent } from './components/pages/empleados/empleados.component';
 import { PolizaModalComponent } from './components/modals/poliza-modal/poliza-modal.component';
+import { InventariosComponent } from './components/pages/inventarios/inventarios.component';
+import { InventarioModalComponent } from './components/modals/inventario-modal/inventario-modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { PolizaModalComponent } from './components/modals/poliza-modal/poliza-mo
     EmpleadoModalComponent,
     PolizasComponent,
     EmpleadosComponent,
-    PolizaModalComponent
+    PolizaModalComponent,
+    InventariosComponent,
+    InventarioModalComponent
   ],
   imports: [
     BrowserModule,
